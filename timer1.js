@@ -1,23 +1,28 @@
 let ass = process.argv.slice(2);
+let digits = new RegExp(/\d/);
 
-let time = ass.filter('');
+let time = ass
+  .map((item) => item = Number(item)) // turn strings into numbers and letters into NaN
+  .filter((item) => digits.test(item)) // removes NaN
+  .filter((item) => item > 0); // removes negative numbers
 
-for (let i = 0; i < time.length; i++) {
-  if (time < 0) {
-    continue;
-  } else {
-    setTimeout(() => {
-      process.stdout.write(`BEEP AT ${time[i]} SECONDS     `);
-    }, time[i] * 1000);
-  }
-}
+console.log(time);
+
 
 // for (let i = 0; i < time.length; i++) {
 //   setTimeout(() => {
-//     console.log(`BEEP AT ${time[i]} SECONDS     `);
+//     process.stdout.write(`BEEP AT ${time[i]} SECONDS     `);
 //   }, time[i] * 1000);
 // }
-// above makes output on separate lines
+
+// above code outputs on same line
+
+for (let i = 0; i < time.length; i++) {
+  setTimeout(() => {
+    console.log(`BEEP AT ${time[i]} SECONDS     `);
+  }, time[i] * 1000);
+}
+// above code outputs on separate lines
 
 setTimeout(() => {
   process.stdout.write('\n');
